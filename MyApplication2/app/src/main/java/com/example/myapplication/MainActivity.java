@@ -24,12 +24,12 @@ public class MainActivity extends AppCompatActivity {
         toggleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFlightMode(MainActivity.this);
+                setAirplaneMode(MainActivity.this);
             }
 
-            public void setFlightMode(Context context) {
+            public void setAirplaneMode(Context context) {
                     // API 16 and earlier.
-                    boolean enabled = isFlightModeEnabled(context);
+                    boolean enabled = isAirplaneModeEnabled(context);
                     Log.i(TAG, "API 16 : " + enabled);
                     Settings.System.putInt(context.getContentResolver(), Settings.System.AIRPLANE_MODE_ON, enabled ? 0 : 1);
                     Intent intent = new Intent(Intent.ACTION_AIRPLANE_MODE_CHANGED);
@@ -39,9 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
             @SuppressLint("NewApi")
             @SuppressWarnings("deprecation")
-            private boolean isFlightModeEnabled(Context context) {
+            private boolean isAirplaneModeEnabled(Context context) {
                 boolean mode = false;
-                // API 16 and earlier.
                 mode = Settings.System.getInt(context.getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 0) == 1;
                 return mode;
             }
